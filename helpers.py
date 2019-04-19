@@ -189,3 +189,22 @@ def upload_file(session, *, filename, folder=None):
     return session.put(api_endpoint(endpoint),
                        headers={'content-type': content_type},
                        data=file_content)
+
+def get_redirectUrl(session):
+    endpoint = "reports/getEmailActivityUserDetail(period='D7')"
+    response = session.get(api_endpoint(endpoint))
+    print(response.status_code)
+    print(response.url)
+    r = urllib.request.urlopen(response.url)
+    content =r.read()
+    with open('abc.csv','wb') as f:
+        f.write(content)
+
+    #print(response.history[0].url)
+
+    return response.url #response.headers['Location']
+
+    #r = requests.get('http://github.com/', allow_redirects=False)
+    #r.status_code  # 302
+    #r.url  # http://github.com, not https.
+    #r.headers['Location']  # https://github.com/ -- the redirect destination

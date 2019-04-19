@@ -6,7 +6,7 @@ import pprint
 import config
 
 from helpers import api_endpoint, device_flow_session, profile_photo, \
-    send_mail, sharing_link, upload_file
+    send_mail, sharing_link, upload_file, get_redirectUrl
 
 def sendmail_sample(session):
     """Send email from authenticated user.
@@ -80,4 +80,6 @@ def sendmail_sample(session):
 if __name__ == '__main__':
     GRAPH_SESSION = device_flow_session(config.CLIENT_ID)
     if GRAPH_SESSION:
-        sendmail_sample(GRAPH_SESSION)
+        get_redirectUrl(GRAPH_SESSION)
+        #sendmail_sample(GRAPH_SESSION)
+
